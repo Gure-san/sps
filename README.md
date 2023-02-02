@@ -8,14 +8,14 @@ pake bahasa indo dan menggunakan `Semantic Commit Message`
 
 Penjelasan:
 
-- `feat`: (menambahkan fitur baru)
-- `fix`: (memperbaiki bug untuk user, bukan script build)
-- `docs`: (mengubah dokumentasi)
-- `style`: (perubahan gaya penulisan kode (spacing, indentasi, dll))
-- `refactor`: (mengubah struktur kode tanpa mempengaruhi fitur)
-- `test`: (perubahan pada test (menambah test, mengubah test, tanpa mengubah kode produksi))
-- `chore`: (mengubah konfigurasi, pemeliharaan, tanpa mengubah kode produksi)
-- `perf`: (perubahan yang memperbaiki peforma)
+- `feat`: menambahkan fitur baru
+- `fix`: memperbaiki bug untuk user, bukan script build
+- `docs`: mengubah dokumentasi
+- `style`: perubahan gaya penulisan kode (spacing, indentasi, dll)
+- `refactor`: mengubah struktur kode tanpa mempengaruhi fitur
+- `test`: perubahan pada test (menambah test, mengubah test, tanpa mengubah kode produksi)
+- `chore`: mengubah konfigurasi, pemeliharaan, tanpa mengubah kode produksi
+- `perf`: perubahan yang memperbaiki peforma
 
 Referensi:
 
