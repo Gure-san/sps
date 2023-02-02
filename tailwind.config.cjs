@@ -26,6 +26,7 @@ module.exports = {
     },
 
     colors: {
+      ...colors,
       black: colors.black,
       white: colors.white
     }
