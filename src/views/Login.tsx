@@ -20,7 +20,7 @@ export default function Login() {
               placeholder='Nama Lengkap'
             />
             <input
-              type='text'
+              type='password'
               className='px-4 py-2 mt-2 border border-dark-100 bg-white focus:border-black rounded-md text-sm '
               placeholder='Password'
             />
