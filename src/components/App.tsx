@@ -5,8 +5,7 @@ import Beranda from '../views/Presensi';
 export default function App() {
   return (
     <React.Fragment>
-      {/* <Login /> */}
-      <Beranda/>
+      <Login/>
     </React.Fragment>
   );
 }
