@@ -31,5 +31,5 @@ module.exports = {
       white: colors.white
     }
   },
-  plugins: []
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })]
 }
