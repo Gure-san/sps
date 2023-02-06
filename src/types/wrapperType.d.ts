@@ -1,7 +1,7 @@
 import React from "react"
 
 type WrapperType = {
-  children: React.ReactElement,
+  children: React.ReactNode,
   className?: string
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import Login from '../views/Login';
-import Presensi from '../views/Presensi';
+import Home from '../views/Home';
 
 export default function App() {
   return (
     <React.Fragment>
       {/* <Login/> */}
-      <Presensi/>
+      <Home/>
     </React.Fragment>
   );
 }

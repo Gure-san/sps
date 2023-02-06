@@ -1,6 +1,6 @@
 import React from 'react';
 import UserIcon from '../../assets/user.svg';
-import { HeaderType, deviceSizeHeaderComponent } from '../../types/headerType';
+import { HeaderType, deviceSizeHeaderComponent } from '../../types/headerTyped';
 
 function Profil({ size }: HeaderType) {
   switch (size) {
