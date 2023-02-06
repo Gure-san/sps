@@ -1,10 +1,10 @@
 import React from "react"
 
-type WrapperType = {
+type WrapperPropType = {
   children: React.ReactNode,
   className?: string
 }
 
 export {
-  WrapperType
+  WrapperPropType
 }

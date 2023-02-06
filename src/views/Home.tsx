@@ -5,9 +5,13 @@ import { Wrapper } from '../components/Wrapper';
 import { Notification } from '../components/Notification';
 import { SkeletonMap } from '../components/Skeleton';
 import { Label } from '../components/Label';
-import { deviceSizeHeaderComponent } from '../types/headerTyped';
-import { homeFormSectionType, formType } from '../types/homeFormSectionType';
-import { notification } from '../types/notificationType';
+import { labelType } from '../types/labelType';
+import { DeviceSizeHeaderComponent } from '../types/headerTyped';
+import {
+  HomeFormSectionPropType,
+  formType,
+} from '../types/homeFormSectionType';
+import { notificationType } from '../types/notificationType';
 import swapIcon from '../assets/swap.svg';
 
 // Info & Tab Navigation
@@ -37,7 +41,7 @@ function FormToggle() {
   );
 }
 
-function HomeFormSection({ type }: homeFormSectionType) {
+function HomeFormSection({ type }: HomeFormSectionPropType) {
   switch (type) {
     case formType.ATTEND:
       let message = 'Kamu berada di dalam area SMKN 4 MALANG';
@@ -51,7 +55,7 @@ function HomeFormSection({ type }: homeFormSectionType) {
               <span className="font-semibold"> smkn 4 malang pada map </span>
             </p>
 
-            <Notification type={notification.VALID} message={message} />
+            <Notification type={notificationType.VALID} message={message} />
 
             <button className="mb-6 text-sm text-white bg-black py-2 px-4 rounded-md">
               Presensi - <span>06.02</span>
@@ -84,9 +88,28 @@ function HomeFormSection({ type }: homeFormSectionType) {
 function HomePrecenseHistorySection() {
   return (
     <div>
-      <h1>Statistik Presensi</h1>
-      <div>
-        <Label />
+      <div className='w-full overflow-auto scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-gray-200 pb-6 '>
+        <div className='flex min-w-max'>
+          <Label group={labelType.PRESENT}>
+            Hadir : 18090
+          </Label>
+
+          <Label group={labelType.PERMISSION}>
+            Izin : 29
+          </Label>
+
+          <Label group={labelType.PERMISSION}>
+            Sakit : 35
+          </Label>
+
+          <Label group={labelType.ABSENT}>
+            Alpha : 8
+          </Label>
+
+          <Label group={labelType.LATE}>
+            Terlambat : 40
+          </Label>
+        </div>
       </div>
     </div>
   );
@@ -95,7 +118,7 @@ function HomePrecenseHistorySection() {
 export default function Home() {
   return (
     <div>
-      <Header size={deviceSizeHeaderComponent.MOBILE} />
+      <Header size={DeviceSizeHeaderComponent.MOBILE} />
 
       <Wrapper className="m-auto max-w-[768px] px-6 pb-6">
         <HomeHeadSection />
