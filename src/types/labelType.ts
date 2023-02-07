@@ -14,6 +14,7 @@ type LabelPropType = {
     | labelType.ABSENT
     | labelType.LATE
   ),
+  noBorder?: boolean,
   [propsName: string]: (string | number | React.ReactNode)
 }
 
