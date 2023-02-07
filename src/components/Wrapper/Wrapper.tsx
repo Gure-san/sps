@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import { WrapperType } from '../../types/wrapperType'
+import { WrapperPropType } from '../../types/wrapperType'
 
 
 
-export function Wrapper(props: WrapperType) {
+export function Wrapper(props: WrapperPropType) {
   return (
     <div className={props.className}>
       {props.children}
