@@ -1,14 +1,12 @@
 import React from 'react';
-import AttendanceHistory from './AttendanceHistory';
+import { AttendanceForm } from './AttendanceForm';
+import { PermissionForm } from './PermissionForm';
 import { Header } from '../components/Header';
 import { Tabs } from '../components/Tabs';
 import { Wrapper } from '../components/Wrapper';
-import { Notification } from '../components/Notification';
-import { SkeletonMap } from '../components/Skeleton';
 import { DeviceSizeHeaderComponent } from '../types/headerTyped';
-import { HomeFormSectionPropType, formType } from '../types/homeFormSectionType';
-import { notificationType } from '../types/notificationType';
 import swapIcon from '../assets/swap.svg';
+import { Outlet } from 'react-router-dom';
 
 // Info & Tab Navigation
 function HomeHeadSection() {
@@ -37,58 +35,16 @@ function FormToggle() {
   );
 }
 
-function HomeFormSection({ type }: HomeFormSectionPropType) {
-  switch (type) {
-    case formType.ATTEND:
-      let message = 'Kamu berada di dalam area SMKN 4 MALANG';
-      return (
-        <div>
-          <FormToggle />
-
-          <div>
-            <p className="text-sm mb-2.5">
-              *pastikan kamu masuk wilayah
-              <span className="font-semibold"> smkn 4 malang pada map </span>
-            </p>
-
-            <Notification type={notificationType.VALID} message={message} />
-
-            <button className="mb-6 text-sm text-white bg-black py-2 px-4 rounded-md">
-              Presensi - <span>06.02</span>
-            </button>
-
-            {/* Map */}
-            <SkeletonMap />
-          </div>
-        </div>
-      );
-
-    case formType.PERMIT:
-      return (
-        <div>
-          <FormToggle />
-
-          <div>
-            <form action="">
-              <div>
-                <h2>* Jenis Izin : </h2>
-              </div>
-            </form>
-          </div>
-        </div>
-      );
-  }
-}
-
 export default function Home() {
   return (
     <div>
       <Header size={DeviceSizeHeaderComponent.MOBILE} />
-
       <Wrapper className="m-auto max-w-[768px] px-6 pb-6">
         <HomeHeadSection />
-        {/* <AttendanceHistory /> */}
-        <HomeFormSection type={formType.PERMIT} />
+        <FormToggle />
+        <Outlet/>
+        {/* <AttendanceForm /> */}
+        {/* <PermissionForm/> */}
       </Wrapper>
     </div>
   );

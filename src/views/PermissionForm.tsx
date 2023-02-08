@@ -1,7 +1,13 @@
 import React from 'react'
 
-export default function PermissionForm() {
+export function PermissionForm() {
   return (
-    <div>PermissionForm</div>
-  )
+    <div>
+      <form action="">
+        <div>
+          <h2>* Jenis Izin : </h2>
+        </div>
+      </form>
+    </div>
+  );
 }
