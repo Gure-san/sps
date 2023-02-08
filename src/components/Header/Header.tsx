@@ -1,10 +1,13 @@
 import React from 'react';
 import UserIcon from '../../assets/user.svg';
-import { HeaderPropType, DeviceSizeHeaderComponent } from '../../types/headerTyped';
+import {
+  HeaderPropType,
+  deviceSizeHeaderComponent,
+} from '../../types/headerType';
 
 function Profil({ size }: HeaderPropType) {
   switch (size) {
-    case DeviceSizeHeaderComponent.DEKSTOP:
+    case deviceSizeHeaderComponent.DEKSTOP:
       return (
         <div className="flex items-center">
           {/* Icon */}
@@ -20,7 +23,7 @@ function Profil({ size }: HeaderPropType) {
         </div>
       );
 
-    case DeviceSizeHeaderComponent.MOBILE:
+    case deviceSizeHeaderComponent.MOBILE:
       return (
         <div className="bg-white shadow-md border border-dark-50 p-2 rounded-full">
           <img src={UserIcon} />

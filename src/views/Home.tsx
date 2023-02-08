@@ -4,7 +4,7 @@ import { PermissionForm } from './PermissionForm';
 import { Header } from '../components/Header';
 import { Tabs } from '../components/Tabs';
 import { Wrapper } from '../components/Wrapper';
-import { DeviceSizeHeaderComponent } from '../types/headerTyped';
+import { deviceSizeHeaderComponent } from '../types/headerType';
 import swapIcon from '../assets/swap.svg';
 import { Outlet } from 'react-router-dom';
 
@@ -38,11 +38,10 @@ function FormToggle() {
 export default function Home() {
   return (
     <div>
-      <Header size={DeviceSizeHeaderComponent.MOBILE} />
-      <Wrapper className="m-auto max-w-[768px] px-6 pb-6">
+      <Header size={deviceSizeHeaderComponent.MOBILE} />
+      <Wrapper>
         <HomeHeadSection />
         <FormToggle />
-        <Outlet/>
         {/* <AttendanceForm /> */}
         {/* <PermissionForm/> */}
       </Wrapper>

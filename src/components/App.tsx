@@ -1,22 +1,51 @@
+// React
 import React from 'react';
+
+// React Router
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+
+// Layouts
+import RootLayout from '../layouts/RootLayout';
+import HomeLayout from '../layouts/HomeLayout';
+
+// Views
 import Login from '../views/Login';
-import Home from '../views/Home';
 import User from '../views/User';
-import { Route, Routes } from 'react-router-dom';
-import { AttendanceForm } from '../views/AttendanceForm';
+import FormGroup from '../views/FormGroup';
 import AttendanceHistory from '../views/AttendanceHistory';
 
+const router = createBrowserRouter([
+  {
+    path: 'login',
+    element: <Login/>
+  },
+  {
+    element: <RootLayout />,
+    children: [
+      {
+        element: <HomeLayout />,
+        children: [
+          {
+            path: 'presensi',
+            element: <FormGroup />,
+          },
+          {
+            path: 'riwayat',
+            element: <AttendanceHistory />,
+          },
+        ],
+      },
+      {
+        path: 'user',
+        element: <User />,
+      },
+    ],
+  },
+]);
+
 export default function App() {
-  return (
-    <React.Fragment>
-      <Routes>
-        <Route element={<Home />}>
-          <Route index path="/presensi" element={<AttendanceForm/>}/>
-          <Route path="/riwayat" element={<AttendanceHistory/>}/>
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<User />} />
-      </Routes>
-    </React.Fragment>
-  );
+  return <RouterProvider router={router} />;
 }
