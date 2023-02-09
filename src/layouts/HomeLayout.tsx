@@ -10,19 +10,10 @@ import { formType } from '../types/formGroupType';
 // Assets
 import swapIcon from '../assets/swap.svg';
 
-export interface PropFormType {
-  type: (
-    | formType.ATTEDANCE 
-    | formType.PERMISSION
-  )
-}
-
 export default function HomeLayout() {
-  const [activeForm, setActiveForm] = useState(formType.ATTEDANCE);
-
-  const forwardedObject: PropFormType = {
-    type: activeForm
-  }
+  const [activeForm, setActiveForm] = useState({
+    type: formType.PERMISSION
+  });
 
   return (
     <React.Fragment>
@@ -55,7 +46,7 @@ export default function HomeLayout() {
           </button>
         </div>
 
-        <Outlet context={forwardedObject}/>
+        <Outlet context={activeForm}/>
       </div>
     </React.Fragment>
   );
