@@ -1,26 +1,22 @@
+// Type
+import {
+  InitialDataForm,
+  ReducerPropType,
+} from './formGroupType';
+
 enum selectStateValue {
   DEFAULT = 'Pilih jenis izin...',
-  NULL = 'Tidak ada jenis izin!'
+  NULL = 'Tidak ada jenis izin!',
 }
 
-interface InitialValue {
+interface DataSelectObject {
   active: boolean,
-  value: string,
-  [propName: string]: (string | boolean)
-}
-
-type ReducerPropType = {
-  type: string,
-  [propName: string]: any
+  value: string | undefined
 }
 
 type SelectPropType = {
-  dataForm: object
-}
+  dataForm: InitialDataForm;
+  dispatch: React.Dispatch<ReducerPropType>;
+};
 
-export {
-  selectStateValue,
-  InitialValue,
-  ReducerPropType,
-  SelectPropType
-}
+export { selectStateValue, SelectPropType, DataSelectObject };

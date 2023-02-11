@@ -1,23 +1,38 @@
+// Type
+import { DataSelectObject } from './selectType';
+
+const HANDLE_CASE = {
+  SELECT: {
+    ACTIVE_COMPONENT: 'active_component',
+    VALUE_COMPONENT: 'value_component',
+  },
+};
+
 enum formType {
   ATTEDANCE = 'attedance',
-  PERMISSION = 'permission'
+  PERMISSION = 'permission',
 }
 
-type DataFormPermission = {
-  selectData: string | null,
-  textareaData: string | null,
-  pushState: boolean,
+interface InitialDataForm  {
+  select: DataSelectObject,
+  textarea: string | null,
+};
+
+type ReducerPropType = {
+  type: string,
+  payload?: string,
+  [propName: string]: string | boolean | undefined 
 }
 
 type FormGroupPropType = {
-  type: (
-    | formType.ATTEDANCE 
-    | formType.PERMISSION
-  )
-}
+  type: formType.ATTEDANCE | formType.PERMISSION;
+};
 
-export {
-  formType,
+export { 
+  formType, 
   FormGroupPropType,
-  DataFormPermission
-}
+  InitialDataForm,
+  ReducerPropType,
+  HANDLE_CASE
+};
+

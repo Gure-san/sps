@@ -1,5 +1,5 @@
 // React
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 
 // React Roter
 import { useOutletContext } from 'react-router-dom';
@@ -11,20 +11,56 @@ import { Select } from '../components/Select';
 import { Textarea } from '../components/Textarea';
 
 // Type
-import { 
-  formType, 
+import {
+  formType,
   FormGroupPropType,
-  DataFormPermission 
+  InitialDataForm,
+  ReducerPropType,
+  HANDLE_CASE
 } from '../types/components/formGroupType';
+import { selectStateValue } from '../types/components/selectType';
 import { notificationType } from '../types/components/notificationType';
+
+const initialValues: InitialDataForm = {
+  select: {
+    active: false,
+    value: selectStateValue.DEFAULT,
+  },
+  textarea: null,
+};
+
+function reducer(state: InitialDataForm, { type, payload }: ReducerPropType): InitialDataForm {
+  switch (type) {
+    case HANDLE_CASE.SELECT.ACTIVE_COMPONENT:
+      return {
+        ...state,
+        select: {
+          ...state.select,
+          active: !state.select.active
+        }
+      };
+
+    case HANDLE_CASE.SELECT.VALUE_COMPONENT:
+      return {
+        ...state,
+        select: {
+          active: !state.select.active,
+          value: payload 
+        }
+      };
+
+    default:
+      return state;
+  }
+}
 
 export default function FormGroup() {
   const contextFormType: FormGroupPropType = useOutletContext();
-  const [dataForm, setDataForm] = useState<DataFormPermission>({
-    selectData: null,
-    textareaData: null,
-    pushState: false,
-  });
+  const [dataForm, setDataForm] = useReducer(reducer, initialValues);
+
+  useEffect(() => {
+    console.log(dataForm.select.value)
+  }, [dataForm.select.value])
 
   switch (contextFormType.type) {
     case formType.ATTEDANCE:
@@ -51,21 +87,19 @@ export default function FormGroup() {
       return (
         <div>
           <form action="">
-            <div className='mb-4'>
+            <div className="mb-4">
               <h2 className="mb-2 font-semibold text-lg">* Jenis Izin : </h2>
-              <Select/>
+              <Select dataForm={dataForm} dispatch={setDataForm}/>
             </div>
 
-            <div className='mb-4'>
+            <div className="mb-4">
               <h2 className="mb-2 font-semibold text-lg">Tambahan : </h2>
-              <Textarea/>
+              <Textarea />
             </div>
 
             <button
-            onClick={() => {
-
-            }}
-            className='px-4 py-2 bg-black text-white rounded-md'>
+              onClick={() => {}}
+              className="px-4 py-2 bg-black text-white rounded-md">
               coba lihat data form
             </button>
           </form>
