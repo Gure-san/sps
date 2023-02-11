@@ -3,6 +3,12 @@ enum formType {
   PERMISSION = 'permission'
 }
 
+type DataFormPermission = {
+  selectData: string | null,
+  textareaData: string | null,
+  pushState: boolean,
+}
+
 type FormGroupPropType = {
   type: (
     | formType.ATTEDANCE 
@@ -12,5 +18,6 @@ type FormGroupPropType = {
 
 export {
   formType,
-  FormGroupPropType
+  FormGroupPropType,
+  DataFormPermission
 }

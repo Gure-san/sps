@@ -1,5 +1,5 @@
 import React from 'react';
-import { notificationType, NotificationPropType } from '../../types/notificationType';
+import { notificationType, NotificationPropType } from '../../types/components/notificationType';
 
 const defaultMessage = 'isi pesan';
 

@@ -9,7 +9,7 @@ import { Header } from '../components/Header';
 import { Wrapper } from '../components/Wrapper';
 
 // Type
-import { deviceSizeHeaderComponent } from '../types/headerType';
+import { deviceSizeHeaderComponent } from '../types/components/headerType';
 
 export default function RootLayout() {
   return (

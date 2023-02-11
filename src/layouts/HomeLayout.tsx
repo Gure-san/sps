@@ -5,14 +5,14 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 // Type
-import { formType } from '../types/formGroupType';
+import { formType } from '../types/components/formGroupType';
 
 // Assets
 import swapIcon from '../assets/swap.svg';
 
 export default function HomeLayout() {
   const [activeForm, setActiveForm] = useState({
-    type: formType.PERMISSION
+    type: formType.PERMISSION,
   });
 
   return (
@@ -46,7 +46,7 @@ export default function HomeLayout() {
           </button>
         </div>
 
-        <Outlet context={activeForm}/>
+        <Outlet context={activeForm} />
       </div>
     </React.Fragment>
   );

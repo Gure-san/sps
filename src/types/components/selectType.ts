@@ -9,18 +9,18 @@ interface InitialValue {
   [propName: string]: (string | boolean)
 }
 
-type ReducerSelectPropType = {
+type ReducerPropType = {
   type: string,
-  payload?: string
+  [propName: string]: any
 }
 
 type SelectPropType = {
-
+  dataForm: object
 }
 
 export {
-  SelectPropType,
   selectStateValue,
   InitialValue,
-  ReducerSelectPropType
+  ReducerPropType,
+  SelectPropType
 }

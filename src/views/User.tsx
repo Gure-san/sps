@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header } from '../components/Header';
 import { Wrapper } from '../components/Wrapper';
-import { deviceSizeHeaderComponent } from '../types/headerType';
+import { deviceSizeHeaderComponent } from '../types/components/headerType';
 
 export default function User() {
   return (

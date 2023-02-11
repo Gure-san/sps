@@ -3,7 +3,7 @@ import UserIcon from '../../assets/user.svg';
 import {
   HeaderPropType,
   deviceSizeHeaderComponent,
-} from '../../types/headerType';
+} from '../../types/components/headerType';
 
 function Profil({ size }: HeaderPropType) {
   switch (size) {
