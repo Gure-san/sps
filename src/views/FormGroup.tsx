@@ -9,6 +9,7 @@ import { Notification } from '../components/Notification';
 import { SkeletonMap } from '../components/Skeleton';
 import { Select } from '../components/Select';
 import { Textarea } from '../components/Textarea';
+import { Uploader } from '../components/Uploader';
 
 // Type
 import {
@@ -18,6 +19,7 @@ import {
   ReducerPropType,
   HANDLE_CASE
 } from '../types/components/formGroupType';
+import { textareaPlaceholder } from '../types/components/textareaType';
 import { selectStateValue } from '../types/components/selectType';
 import { notificationType } from '../types/components/notificationType';
 
@@ -26,26 +28,48 @@ const initialValues: InitialDataForm = {
     active: false,
     value: selectStateValue.DEFAULT,
   },
-  textarea: null,
+  textarea: textareaPlaceholder,
+  uploader: {
+    fileName: null,
+    size: null,
+    type: null
+  }
 };
 
-function reducer(state: InitialDataForm, { type, payload }: ReducerPropType): InitialDataForm {
+function reducer(state: any, { type, payload }: ReducerPropType) {
   switch (type) {
-    case HANDLE_CASE.SELECT.ACTIVE_COMPONENT:
+    case HANDLE_CASE.SELECT.ACTIVE_SELECT_COMPONENT:
       return {
         ...state,
         select: {
           ...state.select,
           active: !state.select.active
-        }
+        },
       };
 
-    case HANDLE_CASE.SELECT.VALUE_COMPONENT:
+    case HANDLE_CASE.SELECT.VALUE_SELECT_COMPONENT:
       return {
         ...state,
         select: {
           active: !state.select.active,
           value: payload 
+        }
+      };
+
+    case HANDLE_CASE.TEXTAREA.VALUE_TEXTAREA_COMPONENT:
+      return {
+        ...state,
+        textarea: payload
+      };
+
+    case HANDLE_CASE.UPLOADER.VALUE_UPLOADER_COMPONENT:
+      const fileInfo: FileList = payload;
+      return {
+        ...state,
+        uploader: {
+          fileName: fileInfo[0].name,
+          size: fileInfo[0].size,
+          type: fileInfo[0].type 
         }
       };
 
@@ -55,15 +79,11 @@ function reducer(state: InitialDataForm, { type, payload }: ReducerPropType): In
 }
 
 export default function FormGroup() {
-  const contextFormType: FormGroupPropType = useOutletContext();
+  const contextFormType: boolean = useOutletContext();
   const [dataForm, setDataForm] = useReducer(reducer, initialValues);
 
-  useEffect(() => {
-    console.log(dataForm.select.value)
-  }, [dataForm.select.value])
-
-  switch (contextFormType.type) {
-    case formType.ATTEDANCE:
+  switch (contextFormType) {
+    case false:
       let message = 'Kamu berada di dalam area SMKN 4 MALANG';
       return (
         <div>
@@ -83,24 +103,29 @@ export default function FormGroup() {
         </div>
       );
 
-    case formType.PERMISSION:
+    case true:
       return (
         <div>
           <form action="">
-            <div className="mb-4">
+            <div className="mb-6">
               <h2 className="mb-2 font-semibold text-lg">* Jenis Izin : </h2>
               <Select dataForm={dataForm} dispatch={setDataForm}/>
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
+              <h2 className="mb-2 font-semibold text-lg">* Bukti Surat / Gambar : </h2>
+              <Uploader dataForm={dataForm} dispatch={setDataForm}/>
+            </div>
+
+            <div className="mb-6">
               <h2 className="mb-2 font-semibold text-lg">Tambahan : </h2>
-              <Textarea />
+              <Textarea dataForm={dataForm} dispatch={setDataForm} />
             </div>
 
             <button
-              onClick={() => {}}
-              className="px-4 py-2 bg-black text-white rounded-md">
-              coba lihat data form
+            className='bg-black text-white text-sm rounded-md px-4 py-2' 
+            type="submit">
+              Kirim
             </button>
           </form>
         </div>

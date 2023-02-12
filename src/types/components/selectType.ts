@@ -1,9 +1,3 @@
-// Type
-import {
-  InitialDataForm,
-  ReducerPropType,
-} from './formGroupType';
-
 enum selectStateValue {
   DEFAULT = 'Pilih jenis izin...',
   NULL = 'Tidak ada jenis izin!',
@@ -14,9 +8,4 @@ interface DataSelectObject {
   value: string | undefined
 }
 
-type SelectPropType = {
-  dataForm: InitialDataForm;
-  dispatch: React.Dispatch<ReducerPropType>;
-};
-
-export { selectStateValue, SelectPropType, DataSelectObject };
+export { selectStateValue, DataSelectObject };

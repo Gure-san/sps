@@ -4,6 +4,7 @@ import React from 'react';
 // React Router
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider,
 } from 'react-router-dom';
 
@@ -19,8 +20,12 @@ import AttendanceHistory from '../views/AttendanceHistory';
 
 const router = createBrowserRouter([
   {
+    path: '/',
+    element: <Navigate to={'/presensi'} />
+  },
+  {
     path: 'login',
-    element: <Login/>
+    element: <Login/>,
   },
   {
     element: <RootLayout />,
@@ -44,6 +49,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '*',
+    element: <Navigate to={'/presensi'} />
+  }
 ]);
 
 export default function App() {

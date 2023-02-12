@@ -1,5 +1,5 @@
 import React from 'react';
-import { LabelPropType, labelType } from '../../types/labelType';
+import { LabelPropType, labelType } from '../../types/components/labelType';
 
 function UnstyledLabel({style, children = 'Label Text'}: LabelPropType) {
   return (

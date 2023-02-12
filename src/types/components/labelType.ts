@@ -1,8 +1,8 @@
 import React from "react"
 
 enum labelType {
-  PRESENT = 'Hadir',
-  PERMISSION = 'Izin',
+  PRESENT = 'present',
+  PERMISSION = 'permission',
   ABSENT = 'absent',
   LATE = 'late'
 }
@@ -13,6 +13,7 @@ type LabelPropType = {
     | labelType.PERMISSION
     | labelType.ABSENT
     | labelType.LATE
+    | string
   ),
   noBorder?: boolean,
   [propsName: string]: (string | number | React.ReactNode)
@@ -20,5 +21,5 @@ type LabelPropType = {
 
 export {
   LabelPropType,
-  labelType
+  labelType,
 }

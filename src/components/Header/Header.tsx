@@ -1,5 +1,10 @@
-import React from 'react';
+// React Router
+import { Link } from 'react-router-dom';
+
+// Asset
 import UserIcon from '../../assets/user.svg';
+
+// Type
 import {
   HeaderPropType,
   deviceSizeHeaderComponent,
@@ -25,9 +30,11 @@ function Profil({ size }: HeaderPropType) {
 
     case deviceSizeHeaderComponent.MOBILE:
       return (
-        <div className="bg-white shadow-md border border-dark-50 p-2 rounded-full">
+        <Link
+        to={'/user'} 
+        className="bg-white shadow-md border border-dark-50 p-2 rounded-full">
           <img src={UserIcon} />
-        </div>
+        </Link>
       );
   }
 }

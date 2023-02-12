@@ -1,13 +1,15 @@
-import React from 'react'
+// Components
 import { SkeletonMap } from '../components/Skeleton';
 import { Notification } from '../components/Notification';
-import { notificationType } from '../types/notificationType';
+
+// Type
+import { notificationType } from '../types/components/notificationType';
 
 export function AttendanceForm() {
   let message = 'Kamu berada di dalam area SMKN 4 MALANG';
   return (
     <div>
-      <p className="text-sm mb-2.5">
+      <p className="text-sm mb-4">
         *pastikan kamu masuk wilayah
         <span className="font-semibold"> smkn 4 malang pada map </span>
       </p>

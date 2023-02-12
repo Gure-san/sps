@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // React Router
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 
 // Type
 import { formType } from '../types/components/formGroupType';
@@ -11,9 +11,8 @@ import { formType } from '../types/components/formGroupType';
 import swapIcon from '../assets/swap.svg';
 
 export default function HomeLayout() {
-  const [activeForm, setActiveForm] = useState({
-    type: formType.PERMISSION,
-  });
+  const [switchForm, setSwitchForm] = useState(false);
+  const {pathname} = useLocation();
 
   return (
     <React.Fragment>
@@ -27,26 +26,32 @@ export default function HomeLayout() {
 
         {/* Tab */}
         <div className="flex border-b border-dark-100">
-          {/* Tabs Link, ini sementara pake element button yak, nanti kalo udah masuk routing, ganti pake link component punya nya react router */}
-          <button className={`min-w-max mr-4 pb-2 text-sm font-semibold`}>
+          <Link
+          to={'/presensi'}
+          className={`min-w-max mr-4 pb-2 text-sm font-semibold ${(pathname === '/presensi') ? 'border-b-2 border-black' : ''}`}>
             Presensi
-          </button>
-          <button className={`min-w-max mr-4 pb-2 text-sm font-semibold`}>
+          </Link>
+
+          <Link
+          to={'/riwayat'} 
+          className={`min-w-max mr-4 pb-2 text-sm font-semibold ${(pathname === '/riwayat') ? 'border-b-2 border-black' : ''}`}>
             Riwayat Kegiatan Presensi Kamu
-          </button>
+          </Link>
         </div>
       </div>
 
       <div>
         {/* Form Switcher */}
         <div className="mb-4 flex items-center justify-between">
-          <h1 className="font-bold text-xl">Form Hadir</h1>
-          <button className="bg-black p-2 rounded-md h-max">
+          <h1 className="font-bold text-xl">Form {switchForm ? 'Izin' : 'Hadir'}</h1>
+          <button
+          onClick={() => setSwitchForm(!switchForm)} 
+          className="bg-black p-2 rounded-md h-max">
             <img src={swapIcon} />
           </button>
         </div>
 
-        <Outlet context={activeForm} />
+        <Outlet context={switchForm} />
       </div>
     </React.Fragment>
   );
