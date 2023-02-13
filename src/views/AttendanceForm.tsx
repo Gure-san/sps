@@ -4,12 +4,13 @@ import { Notification } from '../components/Notification';
 
 // Type
 import { notificationType } from '../types/components/notificationType';
+import { CostumComponentPropType } from '../types/components/formGroupType';
 
-export function AttendanceForm() {
+export function AttendanceForm({formGroupData, dispatch}: CostumComponentPropType) {
   let message = 'Kamu berada di dalam area SMKN 4 MALANG';
   return (
     <div>
-      <p className="text-sm mb-4">
+      <p className="text-sm mb-2.5">
         *pastikan kamu masuk wilayah
         <span className="font-semibold"> smkn 4 malang pada map </span>
       </p>

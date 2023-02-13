@@ -28,15 +28,15 @@ const dataDummy = [
   },
 ];
 
-export function Select({ dataForm, dispatch }: CostumComponentPropType) {
+export function Select({ formGroupData, dispatch }: CostumComponentPropType) {
   const selectContainer = useRef(null);
 
   useClickOutside({
     refElement: selectContainer,
     closeTrigger: () => {
-      if (dataForm.select.active) {
+      if (formGroupData.permission.select.active) {
         dispatch({
-          type: HANDLE_CASE.SELECT.ACTIVE_SELECT_COMPONENT,
+          type: HANDLE_CASE.FORM.PERMISSION.SELECT.ACTIVE_SELECT_COMPONENT,
         });
       }
     },
@@ -48,32 +48,32 @@ export function Select({ dataForm, dispatch }: CostumComponentPropType) {
         <input
           onClick={() =>
             dispatch({
-              type: HANDLE_CASE.SELECT.ACTIVE_SELECT_COMPONENT,
+              type: HANDLE_CASE.FORM.PERMISSION.SELECT.ACTIVE_SELECT_COMPONENT,
             })
           }
           className={`text-sm text-black bg-white w-full px-4 py-2 border border-dark-100 rounded-md cursor-pointer selection:bg-transparent outline-1 shadow-sm ${
-            dataForm.select.active ? 'outline-black' : 'outline-none'
+            formGroupData.permission.select.active ? 'outline-black' : 'outline-none'
           }`}
           type="text"
-          value={dataForm.select.value}
+          value={formGroupData.permission.select.value}
           readOnly
         />
         <img
           className={`absolute right-4 top-2 pointer-events-none duration-300 ${
-            dataForm.select.active ? 'rotate-180' : 'rotate-0'
+            formGroupData.permission.select.active ? 'rotate-180' : 'rotate-0'
           }`}
           src={arrowDown}
         />
       </div>
 
-      {dataForm.select.active && (
+      {formGroupData.permission.select.active && (
         <ul className="absolute z-10 w-full mt-2 text-sm rounded-md border bg-white overflow-hidden shadow-md">
           {dataDummy.map((data) => {
             return (
               <li
                 onClick={() =>
                   dispatch({
-                    type: HANDLE_CASE.SELECT.VALUE_SELECT_COMPONENT,
+                    type: HANDLE_CASE.FORM.PERMISSION.SELECT.DATA_SELECT_COMPONENT,
                     payload: data.nama,
                   })
                 }

@@ -40,17 +40,8 @@ export default function HomeLayout() {
         </div>
       </div>
 
+      {/* Form Group */}
       <div>
-        {/* Form Switcher */}
-        <div className="mb-4 flex items-center justify-between">
-          <h1 className="font-bold text-xl">Form {switchForm ? 'Izin' : 'Hadir'}</h1>
-          <button
-          onClick={() => setSwitchForm(!switchForm)} 
-          className="bg-black p-2 rounded-md h-max">
-            <img src={swapIcon} />
-          </button>
-        </div>
-
         <Outlet context={switchForm} />
       </div>
     </React.Fragment>

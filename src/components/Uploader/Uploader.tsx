@@ -9,7 +9,7 @@ import {
 
 const defaultPlaceholder = 'Tidak ada file yang diupload!';
 
-export function Uploader({dataForm, dispatch}: CostumComponentPropType) {
+export function Uploader({formGroupData, dispatch}: CostumComponentPropType) {
   const inputFileElement = useRef<HTMLInputElement>(null);
   return (
     <div className="flex items-center">
@@ -19,11 +19,11 @@ export function Uploader({dataForm, dispatch}: CostumComponentPropType) {
         className="bg-black text-white rounded-md text-sm px-4 py-2">
         Upload File
       </button>
-      <p className="ml-4">{dataForm.uploader.fileName ?? defaultPlaceholder}</p>
+      <p className="ml-4">{formGroupData.permission.uploader.fileName ?? defaultPlaceholder}</p>
       <input
         onChange={() => {
           dispatch({
-            type: HANDLE_CASE.UPLOADER.VALUE_UPLOADER_COMPONENT,
+            type: HANDLE_CASE.FORM.PERMISSION.UPLOADER.DATA_UPLOADER_COMPONENT,
             payload: inputFileElement.current?.files
           }
         )}}
