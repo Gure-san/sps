@@ -17,8 +17,13 @@ import Login from '../views/Login';
 import User from '../views/User';
 import FormGroup from '../views/FormGroup';
 import AttendanceHistory from '../views/AttendanceHistory';
+import Map from './Map/Map';
 
 const router = createBrowserRouter([
+  {
+    path: 'development',
+    element: <Map/>
+  },
   {
     path: '/',
     element: <Navigate to={'/presensi'} />
