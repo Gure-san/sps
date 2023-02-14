@@ -1,22 +1,12 @@
 // React
-import React, { useEffect, useReducer, useRef, useState } from 'react';
-
-// React Roter
-import { useOutletContext } from 'react-router-dom';
+import React, { useReducer } from 'react';
 
 // Components
 import { AttendanceForm } from './AttendanceForm';
 import { PermissionForm } from './PermissionForm';
-import { Notification } from '../components/Notification';
-import { SkeletonMap } from '../components/Skeleton';
-import { Select } from '../components/Select';
-import { Textarea } from '../components/Textarea';
-import { Uploader } from '../components/Uploader';
 
 // Type
 import {
-  formType,
-  FormGroupPropType,
   InitialState,
   ReducerPropType,
   HANDLE_CASE,

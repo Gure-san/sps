@@ -1,5 +1,4 @@
-// React Router
-import { Link } from "react-router-dom";
+import { Modal } from "../components/Modal";
 
 export default function Login() {
   return (
@@ -27,7 +26,7 @@ export default function Login() {
             />
           </div>
           <button className='bg-black text-white text-sm w-full py-2 mt-4 rounded-md'>
-            Continue
+            Masuk
           </button>
         </form>
 
@@ -40,6 +39,9 @@ export default function Login() {
             Hubungi Admin untuk mengatasi login kamu
           </p>
         </div>
+
+        {/* Modal ( using portal ) */}
+        <Modal/>
       </div>
     </div>
   );

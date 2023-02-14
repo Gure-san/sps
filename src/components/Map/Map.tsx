@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN_ACCESS;
-
+console.log(import.meta.env.VITE_MAPBOX_TOKEN_ACCESS)
 // const targetLocation = {
 //   latitude: -7.989777259175051,
 //   longitude: 112.6273191942892,
