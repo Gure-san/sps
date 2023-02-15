@@ -1,1 +1,1 @@
-export { SkeletonMap } from './Skeleton';
+export { SkeletonMap, SkeletonContactList } from './Skeleton';

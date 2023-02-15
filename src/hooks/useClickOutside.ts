@@ -6,14 +6,17 @@ import { useEventListener } from "./useEventListener";
 
 export function useClickOutside({
   refElement,
-  closeTrigger
+  closeTrigger,
+  element
 }: UseClickOutsidePropType) {
   useEventListener({
     eventType: 'click',
     callback: e => {
-      if(refElement.current === null || refElement.current.contains(e.target)) return;
+      console.log(e.target);
+      console.log(refElement.current)
+      if (refElement.current === null || refElement.current.contains(e.target)) return;
       closeTrigger();
     },
-    element: document
+    element: element ? element : document
   })
 }

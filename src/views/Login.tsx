@@ -1,5 +1,5 @@
 // React
-import { useReducer } from 'react';
+import { useReducer, useRef } from 'react';
 
 // Type
 import {
@@ -10,6 +10,7 @@ import {
 
 // Components
 import { Modal } from '../components/Modal';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 const initialState: InitialState = {
   name: '',
@@ -41,7 +42,6 @@ function reducer(
       `);
 
     case HANDLE_CASE.MODAL:
-      console.log(type)
       return {
         ...state,
         modal: !state.modal,
@@ -54,8 +54,9 @@ function reducer(
 
 export default function Login() {
   const [loginData, setLoginData] = useReducer(reducer, initialState);
+
   return (
-    <div className="w-[100vw] h-[100vh] flex items-center justify-center">
+    <div className="w-[100vw] h-[100vh] flex items-center justify-center over">
       <div className="-translate-y-6">
         {/* Header */}
         <div className="flex flex-col items-center">
@@ -126,7 +127,7 @@ export default function Login() {
         </div>
 
         {/* Modal ( using portal ) */}
-        {loginData.modal && <Modal loginData={loginData} dispatch={setLoginData} />}
+        {loginData.modal && <Modal loginData={loginData} dispatch={setLoginData}/>}
       </div>
     </div>
   );
