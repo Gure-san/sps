@@ -54,6 +54,7 @@ function reducer(
 
 export default function Login() {
   const [loginData, setLoginData] = useReducer(reducer, initialState);
+  const modalActiver = useRef(null);
 
   return (
     <div className="w-[100vw] h-[100vh] flex items-center justify-center over">
@@ -80,7 +81,7 @@ export default function Login() {
                 setLoginData({
                   type: HANDLE_CASE.NAME,
                   payload: {
-                    name: e.target.value
+                    name: e.target.value,
                   },
                 })
               }
@@ -94,7 +95,7 @@ export default function Login() {
                 setLoginData({
                   type: HANDLE_CASE.PASSWORD,
                   payload: {
-                    password: e.target.value
+                    password: e.target.value,
                   },
                 })
               }
@@ -119,15 +120,22 @@ export default function Login() {
         {/* Footer */}
         <div className="flex flex-col items-center">
           <p className="text-sm font-semibold">Tidak bisa login?</p>
-          <button
+          <div
+            ref={modalActiver}
             onClick={() => setLoginData({ type: HANDLE_CASE.MODAL })}
-            className="text-sm underline">
+            className="text-sm underline cursor-pointer">
             Hubungi Admin untuk mengatasi login kamu
-          </button>
-        </div>
+          </div>
 
-        {/* Modal ( using portal ) */}
-        {loginData.modal && <Modal loginData={loginData} dispatch={setLoginData}/>}
+          {/* Modal ( using portal ) */}
+          {loginData.modal && (
+            <Modal
+              loginData={loginData}
+              dispatch={setLoginData}
+              refActiver={modalActiver}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

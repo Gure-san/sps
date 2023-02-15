@@ -65,9 +65,21 @@ function ContactItem() {
   );
 }
 
-export function Modal({ loginData, dispatch }: DataForModalType) {
+export function Modal({ loginData, dispatch, refActiver }: DataForModalType) {
   const [contactList, setContactList] = useState([]);
-  const refModal = useRef(null);
+  const refModal = useRef<HTMLDivElement>(null);
+
+  useEventListener({
+    eventType: 'click',
+    callback: (e) => {
+      console.log(e.target);
+      console.log(refModal.current!.contains(e.target))
+      if(refModal.current === null || e.target === refActiver.current || refModal.current.contains(e.target)) return;
+      dispatch({
+        type: HANDLE_CASE.MODAL
+      })
+    }
+  })
 
   return createPortal(
     <div

@@ -24,7 +24,8 @@ type ReducerPropType = {
 
 type DataForModalType = {
   loginData: InitialState;
-  dispatch: React.Dispatch<ReducerPropType>
+  dispatch: React.Dispatch<ReducerPropType>,
+  refActiver: React.RefObject<HTMLDivElement>
 };
 
 export {
