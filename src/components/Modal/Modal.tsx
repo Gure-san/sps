@@ -23,7 +23,7 @@ import { useEventListener } from '../../hooks/useEventListener';
 
 const dataDummy = [
   {
-    name: 'Abdul Aziz Rahmat Ibnu Fani',
+    name: 'Abdul Aziz Rahmat Ibnu Fani alsdfjals;',
     phone: '0812351918140',
   },
   {
@@ -44,6 +44,10 @@ const dataDummy = [
     name: 'Andre Firmansyah',
     phone: '0814141234013',
   },
+  {
+    name: 'Andre Firmansyah',
+    phone: '0814141234013',
+  },
 ];
 
 function ContactItem({ name, phoneNumber }: ContactItemPropType) {
@@ -60,7 +64,7 @@ function ContactItem({ name, phoneNumber }: ContactItemPropType) {
 
         {/* Info User */}
         <div className="text-sm mx-2">
-          <p className="w-max font-semibold">{name}</p>
+          <p className="w-max font-semibold max-w-[20ch] truncate">{name}</p>
           <p>{formattedNumber}</p>
         </div>
       </div>
@@ -97,7 +101,7 @@ export function Modal({ loginData, dispatch, refActiver }: DataForModalType) {
   return createPortal(
     <div className="absolute left-0 right-0 top-0 bottom-0 z-10 bg-dark-700/90 flex items-center justify-center">
       <div
-        className="bg-white rounded-md border w-max max-w-[280px]"
+        className="bg-white rounded-md border w-max max-w-[280px] max-h-[335px] overflow-auto scrollbar-thin scrollbar-thumb-slate-300"
         ref={refModal}>
         {/* Header */}
         <h2 className="text-sm text-slate-500 px-4 mb-4 py-2 border-b">
