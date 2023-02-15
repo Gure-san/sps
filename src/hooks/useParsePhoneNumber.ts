@@ -19,5 +19,5 @@ export function useParsePhoneNumber({
     return formatedPhoneNumber;
   }
 
-  console.log(formatedPhoneNumber.number![formatType])
+  return formatedPhoneNumber.number![formatType];
 }
