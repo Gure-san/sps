@@ -1,21 +1,30 @@
 // React
-import { useReducer, useRef } from 'react';
+import { useReducer, useRef, useContext, useEffect } from 'react';
 
 // Type
 import {
   InitialState,
-  HANDLE_CASE,
+  LOGIN_HANDLE_CASE,
   ReducerPropType,
 } from '../types/components/loginType';
+import {
+  APP_HANDLE_CASE
+} from '../types/components/appType';
+
 
 // Components
 import { Modal } from '../components/Modal';
-import { useClickOutside } from '../hooks/useClickOutside';
+
+// Context
+import { RootData } from '../context';
 
 const initialState: InitialState = {
   name: '',
   password: '',
+  phoneNumber: '',
+  class: '',
   modal: false,
+  valid: false
 };
 
 function reducer(
@@ -23,25 +32,28 @@ function reducer(
   { type, payload }: ReducerPropType
 ): InitialState {
   switch (type) {
-    case HANDLE_CASE.NAME:
+    case LOGIN_HANDLE_CASE.NAME:
       return {
         ...state,
         name: payload?.name,
       };
 
-    case HANDLE_CASE.PASSWORD:
+    case LOGIN_HANDLE_CASE.PASSWORD:
       return {
         ...state,
         password: payload?.password,
       };
 
-    case HANDLE_CASE.SUBMIT:
-      alert(`
-        nama: ${state.name}
-        password: ${state.password}
-      `);
+    case LOGIN_HANDLE_CASE.SUBMIT:
+      // effect fetch data
+      return {
+        ...state,
+        class: 'XII RPL A',
+        phoneNumber: '081235918140',
+        valid: true // Pass Validation 
+      }
 
-    case HANDLE_CASE.MODAL:
+    case LOGIN_HANDLE_CASE.MODAL:
       return {
         ...state,
         modal: !state.modal,
@@ -53,8 +65,25 @@ function reducer(
 }
 
 export default function Login() {
+  const {data, dispatch} = useContext(RootData);
   const [loginData, setLoginData] = useReducer(reducer, initialState);
   const modalActiver = useRef(null);
+
+  useEffect(() => {
+    if (loginData.valid) {
+      dispatch({
+        type: APP_HANDLE_CASE.USER.LOGIN,
+        payload: {
+          user: {
+            name: loginData.name,
+            phoneNumber: loginData.phoneNumber,
+            class: loginData.class,
+            authenticated: loginData.valid
+          }
+        }
+      })
+    }
+  }, [loginData.valid])
 
   return (
     <div className="w-[100vw] h-[100vh] flex items-center justify-center over">
@@ -70,7 +99,7 @@ export default function Login() {
           onSubmit={(e) => {
             e.preventDefault();
             setLoginData({
-              type: HANDLE_CASE.SUBMIT,
+              type: LOGIN_HANDLE_CASE.SUBMIT,
             });
           }}
           className="flex flex-col items-center my-6">
@@ -79,7 +108,7 @@ export default function Login() {
             <input
               onChange={(e) =>
                 setLoginData({
-                  type: HANDLE_CASE.NAME,
+                  type: LOGIN_HANDLE_CASE.NAME,
                   payload: {
                     name: e.target.value,
                   },
@@ -93,7 +122,7 @@ export default function Login() {
             <input
               onChange={(e) =>
                 setLoginData({
-                  type: HANDLE_CASE.PASSWORD,
+                  type: LOGIN_HANDLE_CASE.PASSWORD,
                   payload: {
                     password: e.target.value,
                   },
@@ -108,7 +137,7 @@ export default function Login() {
           <button
             onSubmit={(e) =>
               setLoginData({
-                type: HANDLE_CASE.SUBMIT,
+                type: LOGIN_HANDLE_CASE.SUBMIT,
               })
             }
             type="submit"
@@ -122,7 +151,7 @@ export default function Login() {
           <p className="text-sm font-semibold">Tidak bisa login?</p>
           <div
             ref={modalActiver}
-            onClick={() => setLoginData({ type: HANDLE_CASE.MODAL })}
+            onClick={() => setLoginData({ type: LOGIN_HANDLE_CASE.MODAL })}
             className="text-sm underline cursor-pointer">
             Hubungi Admin untuk mengatasi login kamu
           </div>

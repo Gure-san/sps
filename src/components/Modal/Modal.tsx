@@ -12,7 +12,7 @@ import { useParsePhoneNumber } from '../../hooks/useParsePhoneNumber';
 // Type
 import {
   DataForModalType,
-  HANDLE_CASE,
+  LOGIN_HANDLE_CASE,
 } from '../../types/components/loginType';
 import { ContactItemPropType } from '../../types/components/modalType';
 
@@ -65,7 +65,7 @@ function ContactItem({ name, phoneNumber }: ContactItemPropType) {
         {/* Info User */}
         <div className="text-sm mx-2">
           <p className="w-max font-semibold max-w-[20ch] truncate">{name}</p>
-          <p>{formattedNumber}</p>
+          <p>{typeof formattedNumber === 'string' ? formattedNumber : '-'}</p>
         </div>
       </div>
 
@@ -84,8 +84,6 @@ export function Modal({ loginData, dispatch, refActiver }: DataForModalType) {
   useEventListener({
     eventType: 'click',
     callback: (e) => {
-      console.log(e.target);
-      console.log(refModal.current!.contains(e.target));
       if (
         refModal.current === null ||
         e.target === refActiver.current ||
@@ -93,7 +91,7 @@ export function Modal({ loginData, dispatch, refActiver }: DataForModalType) {
       )
         return;
       dispatch({
-        type: HANDLE_CASE.MODAL,
+        type: LOGIN_HANDLE_CASE.MODAL,
       });
     },
   });
@@ -105,7 +103,7 @@ export function Modal({ loginData, dispatch, refActiver }: DataForModalType) {
         ref={refModal}>
         {/* Header */}
         <h2 className="text-sm text-slate-500 px-4 mb-4 py-2 border-b">
-          Daftar Kontak
+          Daftar Kontak Admin
         </h2>
 
         {/* Contact List */}

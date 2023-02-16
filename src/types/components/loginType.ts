@@ -4,7 +4,7 @@ import React from "react";
 // Type
 import { DeepPartial } from "../utils/deepPartial"
 
-const HANDLE_CASE = {
+const LOGIN_HANDLE_CASE = {
   NAME: 'name',
   PASSWORD: 'password',
   SUBMIT: 'submit',
@@ -14,7 +14,10 @@ const HANDLE_CASE = {
 type InitialState = {
   name: string | undefined,
   password: string | undefined,
-  modal: boolean | undefined 
+  phoneNumber: string | undefined
+  class: string | undefined,
+  modal: boolean | undefined,
+  valid: boolean
 }
 
 type ReducerPropType = {
@@ -32,5 +35,5 @@ export {
   InitialState,
   ReducerPropType,
   DataForModalType,
-  HANDLE_CASE
+  LOGIN_HANDLE_CASE
 }

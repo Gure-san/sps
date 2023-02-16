@@ -1,65 +1,57 @@
 // React
-import React from 'react';
+import React, { createContext, useReducer, useState } from 'react';
 
 // React Router
+import { RouterProvider } from 'react-router-dom';
+
+// Router
+import { router } from '../routes';
+
+// Type
 import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from 'react-router-dom';
+  AppData,
+  AppReducerPropType,
+  APP_HANDLE_CASE,
+} from '../types/components/appType';
 
-// Layouts
-import RootLayout from '../layouts/RootLayout';
-import HomeLayout from '../layouts/HomeLayout';
+// Context
+import { RootData } from '../context';
 
-// Views
-import Login from '../views/Login';
-import User from '../views/User';
-import FormGroup from '../views/FormGroup';
-import AttendanceHistory from '../views/AttendanceHistory';
-import Map from './Map/Map';
-
-const router = createBrowserRouter([
-  {
-    path: 'development',
-    element: <Map/>
-  },
-  {
-    path: '/',
-    element: <Navigate to={'/presensi'} />
-  },
-  {
-    path: 'login',
-    element: <Login/>,
-  },
-  {
-    element: <RootLayout />,
-    children: [
-      {
-        element: <HomeLayout />,
-        children: [
-          {
-            path: 'presensi',
-            element: <FormGroup />,
-          },
-          {
-            path: 'riwayat',
-            element: <AttendanceHistory />,
-          },
-        ],
-      },
-      {
-        path: 'user',
-        element: <User />,
-      },
-    ],
-  },
-  {
-    path: '*',
-    element: <Navigate to={'/presensi'} />
+const AppInitialState: AppData = {
+  user: {
+    name: null,
+    class: null,
+    phoneNumber: null,
+    authenticated: false
   }
-]);
+};
+
+function reducer(state: AppData, { type, payload }: AppReducerPropType): AppData {
+  switch (type) {
+    case APP_HANDLE_CASE.USER.LOGIN:
+      return {
+        ...state,
+        user: {
+          name: payload.user?.name,
+          class: payload.user?.class,
+          phoneNumber: payload.user?.phoneNumber,
+          authenticated: payload.user?.authenticated!
+        }
+      };
+
+    default:
+      return state;
+  }
+}
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  const [appData, setAppData] = useReducer(reducer, AppInitialState);
+  return (
+    <RootData.Provider value={{
+      data: appData,
+      dispatch: setAppData
+    }}>
+      <RouterProvider router={router} />
+    </RootData.Provider>
+  );
 }
