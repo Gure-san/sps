@@ -1,6 +1,9 @@
 // Costum Hooks
 import { usePagination, DOTS } from '../../hooks/usePagination';
 
+// Utils
+import { v4 as uuidv4 } from 'uuid';
+
 // Type
 import { PaginationPropType } from '../../types/components/paginationType';
 
@@ -42,7 +45,7 @@ export function Pagination({
     <div className='min-w-max'>
       <ul className="flex items-center w-full">
         {/* Left navigation arrow */}
-        <li>
+        <li key={uuidv4()}>
           <button
           onClick={onPrevious} 
           className={`bg-slate-100 border border-slate-200 p-1.5 mr-3 flex rounded-md ${currentPage === 1 ? 'pointer-events-none selection:bg-transparent' : ''}`}>
@@ -54,7 +57,7 @@ export function Pagination({
           // If the pageItem is a DOT, render the DOTS unicode character
           if (pageNumber === DOTS) {
             return (
-              <li>
+              <li key={uuidv4()}>
                 <button className="bg-slate-100 border border-slate-200 py-1 px-3 mr-3 h-full text-sm flex font-semibold rounded-md">
                   ...
                 </button>
@@ -63,7 +66,7 @@ export function Pagination({
           }
 
           return (
-            <li>
+            <li key={uuidv4()}>
               <button
                 onClick={() => onPageChange(pageNumber)}
                 className={`py-1 px-3 mr-3 h-full text-sm flex font-semibold rounded-md ${
@@ -78,14 +81,7 @@ export function Pagination({
         })}
 
         {/*  Right Navigation arrow */}
-        {/* <li
-          className={classnames('pagination-item', {
-            disabled: currentPage === lastPage,
-          })}
-          onClick={onNext}>
-          <div className="arrow right" />
-        </li> */}
-        <li>
+        <li key={uuidv4()}>
           <button
           onClick={onNext} 
           className={`bg-slate-100 border border-slate-200 p-1.5  flex rounded-md ${currentPage === lastPage ? 'pointer-events-none selection:bg-transparent' : ''}`}>

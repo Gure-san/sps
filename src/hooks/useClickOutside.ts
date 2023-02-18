@@ -12,9 +12,7 @@ export function useClickOutside({
   useEventListener({
     eventType: 'click',
     callback: e => {
-      console.log(e.target);
-      console.log(refElement.current)
-      if (refElement.current === null || refElement.current.contains(e.target)) return;
+      if (refElement.current === null || refElement.current.contains(e?.target)) return;
       closeTrigger();
     },
     element: element ? element : document

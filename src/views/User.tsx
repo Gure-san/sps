@@ -19,16 +19,33 @@ export default function User() {
           <p>XII RPL A - 1</p>
         </div>
 
-        {/* Phone Section */}
-        <div>
+        {/* Phone Number Section */}
+        <div className="mb-4">
           <h2 className="font-semibold text-lg mb-1">
-            No Telephone (Whatsapp)
+            No Telephone (Whatsapp) :
           </h2>
           <div className="flex">
             <p>081235918153</p>
-            <button className="ml-3 bg-black text-white text-xs font-semibold rounded-md px-4 py-1">
-              Edit
-            </button>
+          </div>
+        </div>
+
+        {/* Device Name Section */}
+        <div className="mb-4">
+          <h2 className="font-semibold text-lg mb-1">
+            Nama Perangkat :
+          </h2>
+          <div className="flex">
+            <p>Redmi 9C</p>
+          </div>
+        </div>
+
+        {/* Device ID Section */}
+        <div className="mb-4">
+          <h2 className="font-semibold text-lg mb-1">
+            ID Perangkat :
+          </h2>
+          <div className="flex">
+            <p>123MVH1341%$HV</p>
           </div>
         </div>
       </div>

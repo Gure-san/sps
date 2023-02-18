@@ -9,8 +9,8 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN_ACCESS;
 // };
 
 export default function Map() {
-  const mapContainer = useRef('');
-  const map = useRef('');
+  const mapContainer = useRef<any>('');
+  const map = useRef<any>('');
   const [lng, setLng] = useState(112.6273191942892);
   const [lat, setLat] = useState(-7.989777259175051);
   const [zoom, setZoom] = useState(18);
@@ -37,7 +37,6 @@ export default function Map() {
   return (
     <div>
       <div ref={mapContainer} className="h-[100vh]">
-        <div>coba</div>
       </div>
     </div>
   );

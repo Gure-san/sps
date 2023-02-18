@@ -16,7 +16,7 @@ export function Uploader({formGroupData, dispatch}: CostumComponentPropType) {
       <button
         type="button"
         onClick={() => { inputFileElement.current?.click() }}
-        className="bg-black text-white rounded-md text-sm px-4 py-2">
+        className="min-w-max bg-black text-white rounded-md text-sm px-4 py-2">
         Upload File
       </button>
       <p className="ml-4">{formGroupData.permission.uploader.fileName ?? defaultPlaceholder}</p>

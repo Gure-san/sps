@@ -1,9 +1,12 @@
 // React
 import React, { useReducer } from 'react';
 
-// Components
+// Views
 import { AttendanceForm } from './AttendanceForm';
 import { PermissionForm } from './PermissionForm';
+
+// Components
+import { Notification } from '../components/Notification';
 
 // Type
 import {
@@ -13,14 +16,16 @@ import {
 } from '../types/components/formGroupType';
 import { textareaPlaceholder } from '../types/components/textareaType';
 import { selectStateValue } from '../types/components/selectType';
+import { notificationType } from '../types/components/notificationType';
 
 // Asset
 import swapIcon from '../assets/swap.svg';
+import close from '../assets/close.svg';
 
 const initialState: InitialState = {
   attedance: {
     date: null,
-    timeStamp: null,
+    timestamp: null,
     user: null,
   },
   permission: {
@@ -35,7 +40,7 @@ const initialState: InitialState = {
     textarea: textareaPlaceholder,
   },
   switcher: {
-    status: false
+    status: false,
   },
 };
 
@@ -110,28 +115,42 @@ export default function FormGroup() {
     <React.Fragment>
       {/* Form Switcher */}
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="font-bold text-xl">Form Hadir</h1>
+        <h1 className="font-bold text-xl">
+          Form {formGroupData.switcher.status ? 'Izin' : 'Hadir'}
+        </h1>
         <button
-          onClick={() => setFormGroupData({
-            type: HANDLE_CASE.SWITCH_FORM.ACTIVE_SWITCH
-          })}
+          onClick={() =>
+            setFormGroupData({
+              type: HANDLE_CASE.SWITCH_FORM.ACTIVE_SWITCH,
+            })
+          }
           className="bg-black p-2 rounded-md h-max">
           <img src={swapIcon} />
         </button>
       </div>
 
+      {/* Guide */}
+      <Notification
+      className='text-sm mb-6' 
+      type={notificationType.VALID}>
+        <p>
+          Klik tombol <span className="italic font-semibold">Switch Form</span> yang ada di sebelah kanan judul form, untuk
+          mengubah form yang sesuai dengan presensi kamu
+        </p>
+      </Notification>
+
       {/* Form */}
-      {
-        !formGroupData.switcher.status
-          ? <AttendanceForm
-            formGroupData={formGroupData}
-            dispatch={setFormGroupData}
-          />
-          : <PermissionForm
-            formGroupData={formGroupData}
-            dispatch={setFormGroupData}
-          />
-      }
+      {!formGroupData.switcher.status ? (
+        <AttendanceForm
+          formGroupData={formGroupData}
+          dispatch={setFormGroupData}
+        />
+      ) : (
+        <PermissionForm
+          formGroupData={formGroupData}
+          dispatch={setFormGroupData}
+        />
+      )}
     </React.Fragment>
   );
 }

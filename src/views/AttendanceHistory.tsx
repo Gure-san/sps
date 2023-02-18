@@ -1,5 +1,8 @@
 // React
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
+
+// Utils
+import {v4 as uuidv4} from 'uuid';
 
 // Components
 import { Label } from '../components/Label';
@@ -12,6 +15,10 @@ import { Pagination } from '../components/Pagination';
 
 // Assets
 import sort from '../assets/sort.svg';
+
+// Costum Hooks
+import { useEventListener } from '../hooks/useEventListener';
+import { useScroll } from '../hooks/useScroll';
 
 // Data Dummy (For Development Purpose)
 import data from '../mockData.json';
@@ -30,7 +37,8 @@ export default function AttendanceHistory() {
   return (
     <div>
       {/* Label group */}
-      <div className="w-full overflow-auto scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-slate-100 pb-6 my-4">
+      <div
+      className="w-full overflow-auto scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-slate-100 pb-6 my-4">
         <div className="flex min-w-max">
           <Label group={labelType.PRESENT}>Hadir : 18090</Label>
 
@@ -68,7 +76,9 @@ export default function AttendanceHistory() {
             <tbody>
               {currentTableData.map(({ tanggal, status, group }) => {
                 return (
-                  <tr className="bg-white border-b">
+                  <tr
+                  key={uuidv4()} 
+                  className="bg-white border-b">
                     <td scope="row" className="px-6 py-4 whitespace-nowrap">
                       {tanggal}
                     </td>

@@ -20,7 +20,7 @@ const dataDummy = [
   },
   {
     id: 2,
-    nama: 'Pernikahan',
+    nama: 'Dispensasi',
   },
   {
     id: 3,

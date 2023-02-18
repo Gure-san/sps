@@ -6,25 +6,30 @@ import { notificationType, NotificationPropType } from '../../types/components/n
 
 const defaultMessage = 'isi pesan';
 
-export function Notification({message = defaultMessage, type}: NotificationPropType) {
+export function Notification({
+  noClose = false,
+  className,
+  children,
+  type
+}: NotificationPropType) {
   switch(type) {
     case notificationType.VALID :
       return (
-        <div className='mb-4 text-sm font-semibold flex items-center justify-between rounded-md py-2 px-4 bg-green-100 text-green-900 border-green-900'>
-          <p>{message}</p>
-          <button className='font-bold h-full ml-2'>
+        <div className={`${className} flex items-center justify-between rounded-md py-2 px-4 bg-green-100 text-green-900 border-green-900`}>
+          {children}
+          {!noClose && <button className='font-bold min-w-max min-h-max ml-2'>
             <img src={close}/>
-          </button>
+          </button>}
         </div>
       )
 
     case notificationType.INVALID :
       return (
-        <div className='mb-4 text-sm font-semibold flex items-center justify-between rounded-md py-2 px-4 bg-red-100 text-red-900'>
-          <p>{message}</p>
-          <button className='font-bold h-full ml-2'>
+        <div className={`${className} flex items-center justify-between rounded-md py-2 px-4 bg-red-100 text-red-900`}>
+          {children}
+          {!noClose && <button className='font-bold h-full ml-2'>
             <img src={close}/>
-          </button>
+          </button>}
         </div>
       )
   }

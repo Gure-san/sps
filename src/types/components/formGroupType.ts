@@ -1,10 +1,6 @@
 // React
 import React from 'react';
 
-// Type
-import { DataSelectObject } from './selectType';
-import { UploaderObject } from './uploaderType';
-
 enum formType {
   ATTEDANCE = 'attedance',
   PERMISSION = 'permission',
@@ -13,7 +9,7 @@ enum formType {
 interface InitialState {
   attedance: {
     user: object | null; // user interface
-    timeStamp: string | null;
+    timestamp: string | null;
     date: object | null; // date interface
   };
   permission: {

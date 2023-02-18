@@ -4,11 +4,8 @@ import React, { useState } from 'react';
 // React Router
 import { Outlet, Link, useLocation } from 'react-router-dom';
 
-// Type
-import { formType } from '../types/components/formGroupType';
-
-// Assets
-import swapIcon from '../assets/swap.svg';
+// Components
+import { Timestamp } from '../components/Timestamp';
 
 export default function HomeLayout() {
   const [switchForm, setSwitchForm] = useState(false);
@@ -18,10 +15,14 @@ export default function HomeLayout() {
     <React.Fragment>
       <div className="mb-6">
         {/* Info Attedance Activity */}
-        <div className="mb-2">
-          <h1 className="font-bold text-xl mb-2">Kegiatan Presensi Hari Ini</h1>
-          <p className="font-semibold">Juma'at, 13 Januari 2023</p>
-          <p className="font-semibold">Dibuka pukul - 06.02</p>
+        <div className="mb-4">
+          <h1 className="font-bold text-xl mb-1">Kegiatan Presensi Hari Ini</h1>
+          <p className="font-semibold">
+            Juma'at, 13 Januari 2023
+          </p>
+          <p className="font-semibold">
+            Dibuka pukul - <Timestamp time='06.02'/>
+          </p>
         </div>
 
         {/* Tab */}
@@ -35,7 +36,7 @@ export default function HomeLayout() {
           <Link
           to={'/riwayat'} 
           className={`min-w-max mr-4 pb-2 text-sm font-semibold ${(pathname === '/riwayat') ? 'border-b-2 border-black' : ''}`}>
-            Riwayat Kegiatan Presensi Kamu
+            Riwayat Presensi
           </Link>
         </div>
       </div>

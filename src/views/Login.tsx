@@ -116,7 +116,7 @@ export default function Login() {
               }
               value={loginData.name}
               type="text"
-              className="px-4 py-2 mt-2 border border-dark-100 bg-white focus:border-black rounded-md text-sm "
+              className="px-4 py-2 mt-2 border border-dark-100 bg-white focus:border-black rounded-md text-sm outline-black"
               placeholder="Nama Lengkap"
             />
             <input
@@ -130,7 +130,7 @@ export default function Login() {
               }
               value={loginData.password}
               type="password"
-              className="px-4 py-2 mt-2 border border-dark-100 bg-white focus:border-black rounded-md text-sm "
+              className="px-4 py-2 mt-2 border border-dark-100 bg-white focus:border-black rounded-md text-sm outline-black"
               placeholder="Password"
             />
           </div>
