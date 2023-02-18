@@ -1,12 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      sans: ['Roboto', ...defaultTheme.fontFamily.sans],
       colors: {
         black: '#1E1E1E',
         white: '#F8F8F8',
@@ -20,16 +22,16 @@ module.exports = {
           600: '#565759',
           700: '#3d3e3f',
           800: '#252526',
-          900: '#0c0c0e'
-        }
-      }
+          900: '#0c0c0e',
+        },
+      },
     },
 
     colors: {
       ...colors,
       black: colors.black,
-      white: colors.white
-    }
+      white: colors.white,
+    },
   },
-  plugins: [require('tailwind-scrollbar')({ nocompatible: true })]
-}
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
+};
