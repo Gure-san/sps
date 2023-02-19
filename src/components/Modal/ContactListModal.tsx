@@ -22,8 +22,8 @@ import { useParsePhoneNumber } from '../../hooks/useParsePhoneNumber';
 // Components
 import { SkeletonContactList } from '../Skeleton';
 
-// Utils
-import { v4 as uuidv4 } from 'uuid';
+// Lib
+import { nanoid } from 'nanoid';
 
 // Assets
 import arrowRight from '../../assets/arrow-right.svg';
@@ -124,7 +124,7 @@ export function ContactListModal({
           {contactList !== null ? (
             contactList.map((data) => (
               <ContactItem
-                key={uuidv4()}
+                key={nanoid()}
                 name={data?.name}
                 phoneNumber={data?.phoneNumber}
               />

@@ -1,8 +1,8 @@
 // React
 import { useMemo, useRef, useState, useEffect } from 'react';
 
-// Utils
-import {v4 as uuidv4} from 'uuid';
+// Lib
+import { nanoid } from 'nanoid';
 
 // Components
 import { Label } from '../components/Label';
@@ -37,8 +37,7 @@ export default function AttendanceHistory() {
   return (
     <div>
       {/* Label group */}
-      <div
-      className="w-full overflow-auto scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-slate-100 pb-6 my-4">
+      <div className="w-full overflow-auto scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-slate-100 pb-6 my-4">
         <div className="flex min-w-max">
           <Label group={labelType.PRESENT}>Hadir : 18090</Label>
 
@@ -53,7 +52,7 @@ export default function AttendanceHistory() {
       </div>
 
       {/* Tabel */}
-      <div className='overflow-x-auto pb-6'>
+      <div className="overflow-x-auto pb-6">
         <h2 className="mb-4 font-bold text-lg">Riwayat Presensi</h2>
 
         <div className="mb-4 relative  sm:rounded-lg">
@@ -76,9 +75,7 @@ export default function AttendanceHistory() {
             <tbody>
               {currentTableData.map(({ tanggal, status, group }) => {
                 return (
-                  <tr
-                  key={uuidv4()} 
-                  className="bg-white border-b">
+                  <tr key={nanoid()} className="bg-white border-b">
                     <td scope="row" className="px-6 py-4 whitespace-nowrap">
                       {tanggal}
                     </td>
@@ -96,10 +93,10 @@ export default function AttendanceHistory() {
 
         {/* <Pagination /> */}
         <Pagination
-        currentPage={currentPage}
-        onPageChange={setCurrentPage}
-        pageSize={pageSize}
-        totalCount={data.length}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          pageSize={pageSize}
+          totalCount={data.length}
         />
       </div>
     </div>
