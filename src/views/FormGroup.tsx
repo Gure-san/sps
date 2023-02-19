@@ -1,5 +1,5 @@
 // React
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 // Views
 import { AttendanceForm } from './AttendanceForm';
@@ -18,6 +18,9 @@ import { textareaPlaceholder } from '../types/components/textareaType';
 import { selectStateValue } from '../types/components/selectType';
 import { notificationType } from '../types/components/notificationType';
 
+// Costum Hooks
+import { useLocalStorage } from '../hooks/useLocalStorage';
+
 // Asset
 import swapIcon from '../assets/swap.svg';
 
@@ -26,7 +29,7 @@ const initialState: InitialState = {
     date: null,
     timestamp: null,
     user: null,
-    confirmAction: false
+    confirmAction: false,
   },
   permission: {
     select: {
@@ -38,11 +41,15 @@ const initialState: InitialState = {
       fileInfo: null,
     },
     textarea: textareaPlaceholder,
-    confirmAction: false
+    confirmAction: false,
   },
   switcher: {
     status: false,
+    tooltip: true,
   },
+  localStorage: {
+    fetchInitialData: false
+  }
 };
 
 function reducer(
@@ -55,8 +62,8 @@ function reducer(
         ...state,
         attedance: {
           ...state.attedance,
-          confirmAction: !state.attedance.confirmAction
-        }
+          confirmAction: !state.attedance.confirmAction,
+        },
       };
 
     case FORM_GROUP_HANDLE_CASE.ATTEDANCE.SUBMIT:
@@ -64,8 +71,8 @@ function reducer(
         ...state,
         attedance: {
           ...state.attedance,
-          confirmAction: false
-        }
+          confirmAction: false,
+        },
       };
 
     case FORM_GROUP_HANDLE_CASE.PERMISSION.SELECT.ACTIVE:
@@ -119,8 +126,8 @@ function reducer(
         ...state,
         permission: {
           ...state.permission,
-          confirmAction: !state.permission.confirmAction
-        }
+          confirmAction: !state.permission.confirmAction,
+        },
       };
 
     case FORM_GROUP_HANDLE_CASE.PERMISSION.SUBMIT:
@@ -128,17 +135,45 @@ function reducer(
         ...state,
         permission: {
           ...state.permission,
-          confirmAction: false
-        }
+          confirmAction: false,
+        },
       };
 
     case FORM_GROUP_HANDLE_CASE.SWITCHER.ACTIVE:
       return {
         ...state,
         switcher: {
+          ...state.switcher,
           status: !state.switcher.status,
         },
       };
+
+    case FORM_GROUP_HANDLE_CASE.SWITCHER.TOOLTIP.CLOSE:
+      useLocalStorage({
+        method: 'set',
+        key: 'sps.tooltip',
+        value: false
+      });
+
+      return {
+        ...state,
+        switcher: {
+          ...state.switcher,
+          tooltip: false,
+        },
+      };
+
+    case FORM_GROUP_HANDLE_CASE.LOCAL_STORAGE.SWITCHER.TOOLTIP.FETCH:
+      return {
+        ...state,
+        switcher: {
+          ...state.switcher,
+          tooltip: payload
+        },
+        localStorage: {
+          fetchInitialData: true
+        }
+      }
 
     default:
       return state;
@@ -147,6 +182,22 @@ function reducer(
 
 export default function FormGroup() {
   const [formGroupData, setFormGroupData] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const tooltipState = useLocalStorage({
+      method: 'get',
+      key: 'sps.tooltip'
+    });
+
+    if(!formGroupData.localStorage.fetchInitialData && tooltipState !== null) {
+      setFormGroupData({
+        type: FORM_GROUP_HANDLE_CASE.LOCAL_STORAGE.SWITCHER.TOOLTIP.FETCH,
+        payload: tooltipState
+      })
+    }
+  }, [formGroupData.switcher.tooltip]);
+
+  console.log(formGroupData.switcher.tooltip)
 
   return (
     <React.Fragment>
@@ -166,15 +217,24 @@ export default function FormGroup() {
         </button>
       </div>
 
-      {/* Guide */}
-      <Notification
-      className='text-sm mb-6' 
-      type={notificationType.VALID}>
-        <p>
-          Klik tombol <span className="italic font-semibold">Switch Form</span> yang ada di sebelah kanan judul form, untuk
-          mengubah form yang sesuai dengan presensi kamu
-        </p>
-      </Notification>
+      {/* Tooltip Form Swithcher */}
+      {formGroupData.switcher.tooltip && (
+        <Notification
+          dispatch={() => {
+            setFormGroupData({
+              type: FORM_GROUP_HANDLE_CASE.SWITCHER.TOOLTIP.CLOSE,
+            });
+          }}
+          className="text-sm mb-6"
+          type={notificationType.VALID}>
+          <p>
+            Klik tombol{' '}
+            <span className="italic font-semibold">Switch Form</span> yang ada
+            di sebelah kanan judul form, untuk mengubah form yang sesuai dengan
+            presensi kamu
+          </p>
+        </Notification>
+      )}
 
       {/* Form */}
       {!formGroupData.switcher.status ? (

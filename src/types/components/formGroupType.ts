@@ -27,6 +27,10 @@ interface InitialState {
   };
   switcher: {
     status: boolean,
+    tooltip: boolean
+  },
+  localStorage: {
+    fetchInitialData: boolean
   }
 }
 
@@ -70,7 +74,17 @@ const FORM_GROUP_HANDLE_CASE = {
     SUBMIT: 'permission_submit'
   },
   SWITCHER: {
-    ACTIVE: 'switcher_active'
+    ACTIVE: 'switcher_active',
+    TOOLTIP: {
+      CLOSE: 'switcher_tooltip_close'
+    }
+  },
+  LOCAL_STORAGE: {
+    SWITCHER: {
+      TOOLTIP: {
+        FETCH: 'local_storage_switcher_tooltip_fetch'
+      }
+    }
   }
 }
 

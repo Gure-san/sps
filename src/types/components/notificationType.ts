@@ -7,6 +7,7 @@ enum notificationType {
 }
 
 type NotificationPropType = {
+  dispatch?: () => void,
   noClose?: boolean,
   className?: string,
   children: React.ReactNode,
