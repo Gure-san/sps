@@ -25,8 +25,8 @@ type ReducerPropType = {
   payload?: DeepPartial<InitialState>
 }
 
-type DataForModalType = {
-  loginData: InitialState;
+type DataForContactListModalType = {
+  loginData?: InitialState;
   dispatch: React.Dispatch<ReducerPropType>,
   refActiver: React.RefObject<HTMLDivElement>
 };
@@ -34,6 +34,6 @@ type DataForModalType = {
 export {
   InitialState,
   ReducerPropType,
-  DataForModalType,
+  DataForContactListModalType,
   LOGIN_HANDLE_CASE
 }

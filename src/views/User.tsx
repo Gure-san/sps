@@ -52,7 +52,7 @@ export default function User() {
 
       <Link
       to={'/presensi'} 
-      className="bg-black text-white px-4 py-2 rounded-md text-sm font-semibold">
+      className="bg-black text-white px-4 py-2 rounded-md text-sm">
         Kembali
       </Link>
     </div>

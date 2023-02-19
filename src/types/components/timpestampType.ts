@@ -1,7 +1,8 @@
 
 
 type TimestampePropType = {
-  time: string
+  time: string,
+  className?: string
 }
 
 export {

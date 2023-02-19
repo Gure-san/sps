@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react";
-import { UseEventListenerPropType } from "../types/hooks/useEventListenerType";
+import { useEffect, useRef, useState } from 'react';
+import { UseEventListenerPropType } from '../types/hooks/useEventListenerType';
 
 export function useEventListener({
   eventType,
   callback,
-  element = window
+  element = window,
 }: UseEventListenerPropType) {
   const callbackRef = useRef(callback);
 
@@ -13,9 +13,11 @@ export function useEventListener({
   }, [callback]);
 
   useEffect(() => {
-    const handler = (e: any) => callbackRef.current(e);
-    element.addEventListener(eventType, handler);
+    if (element !== null) {
+      const handler = (e: any) => callbackRef.current(e);
+      element.addEventListener(eventType, handler);
 
-    return () => element.removeEventListener(eventType, handler);
-  }, [eventType, element])
+      return () => element.removeEventListener(eventType, handler);
+    }
+  }, [eventType, element]);
 }

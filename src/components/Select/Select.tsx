@@ -4,7 +4,7 @@ import { useRef } from 'react';
 // Type
 import {
   CostumComponentPropType,
-  HANDLE_CASE,
+  FORM_GROUP_HANDLE_CASE,
 } from '../../types/components/formGroupType';
 
 // Costum Hooks
@@ -36,7 +36,7 @@ export function Select({ formGroupData, dispatch }: CostumComponentPropType) {
     closeTrigger: () => {
       if (formGroupData.permission.select.active) {
         dispatch({
-          type: HANDLE_CASE.FORM.PERMISSION.SELECT.ACTIVE_SELECT_COMPONENT,
+          type: FORM_GROUP_HANDLE_CASE.PERMISSION.SELECT.ACTIVE,
         });
       }
     },
@@ -48,7 +48,7 @@ export function Select({ formGroupData, dispatch }: CostumComponentPropType) {
         <input
           onClick={() =>
             dispatch({
-              type: HANDLE_CASE.FORM.PERMISSION.SELECT.ACTIVE_SELECT_COMPONENT,
+              type: FORM_GROUP_HANDLE_CASE.PERMISSION.SELECT.ACTIVE,
             })
           }
           className={`text-sm text-black bg-white w-full px-4 py-2 border border-dark-100 rounded-md cursor-pointer selection:bg-transparent outline-1 shadow-sm ${
@@ -73,7 +73,7 @@ export function Select({ formGroupData, dispatch }: CostumComponentPropType) {
               <li
                 onClick={() =>
                   dispatch({
-                    type: HANDLE_CASE.FORM.PERMISSION.SELECT.DATA_SELECT_COMPONENT,
+                    type: FORM_GROUP_HANDLE_CASE.PERMISSION.SELECT.DATA,
                     payload: data.nama,
                   })
                 }

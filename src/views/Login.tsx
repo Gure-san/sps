@@ -11,9 +11,8 @@ import {
   APP_HANDLE_CASE
 } from '../types/components/appType';
 
-
 // Components
-import { Modal } from '../components/Modal';
+import { ContactListModal } from '../components/Modal';
 
 // Context
 import { RootData } from '../context';
@@ -158,8 +157,7 @@ export default function Login() {
 
           {/* Modal ( using portal ) */}
           {loginData.modal && (
-            <Modal
-              loginData={loginData}
+            <ContactListModal
               dispatch={setLoginData}
               refActiver={modalActiver}
             />

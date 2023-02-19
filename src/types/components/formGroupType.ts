@@ -8,9 +8,10 @@ enum formType {
 
 interface InitialState {
   attedance: {
-    user: object | null; // user interface
-    timestamp: string | null;
-    date: object | null; // date interface
+    user: object | null, // user interface
+    timestamp: string | null,
+    date: object | null, // date interface
+    confirmAction: boolean
   };
   permission: {
     select: {
@@ -21,14 +22,15 @@ interface InitialState {
       fileName: string | null,
       fileInfo: FileList | null
     };
-    textarea: string;
+    textarea: string,
+    confirmAction: boolean
   };
   switcher: {
     status: boolean,
   }
 }
 
-type ReducerPropType = {
+type FormGroupReducerPropType = {
   type: string,
   payload?: any, 
 }
@@ -38,41 +40,47 @@ type FormGroupPropType = {
 };
 
 type CostumComponentPropType = {
-  formGroupData: InitialState;
-  dispatch: React.Dispatch<ReducerPropType>;
-};
+  formGroupData: InitialState,
+  dispatch: React.Dispatch<FormGroupReducerPropType>,
 
-const HANDLE_CASE = {
-  SWITCH_FORM: {
-    ACTIVE_SWITCH: 'active_switch'
-  },
-  FORM: {
-    ATTEDANCE: {
-      MAP: null,
-      ACTION: null, 
-    },
-    PERMISSION: {
-      SELECT: {
-        ACTIVE_SELECT_COMPONENT: 'active_select_component',
-        DATA_SELECT_COMPONENT: 'data_select_component',
-      },
-      TEXTAREA: {
-        DATA_TEXTAREA_COMPONENT: 'data_textarea_component',
-      },
-      UPLOADER: {
-        DATA_UPLOADER_COMPONENT: 'data_uploader_component',
-      },
-    },
-  },
 };
+;
+
+const FORM_GROUP_HANDLE_CASE = {
+  ATTEDANCE: {
+    CONFIRM_MODAL: {
+      ACTIVE: 'attedance_confirm_modal_active'
+    },
+    SUBMIT: 'attedance_submit'
+  },
+  PERMISSION: {
+    SELECT: {
+      ACTIVE: 'permission_select_active',
+      DATA: 'permission_select_data'
+    },
+    TEXTAREA: {
+      DATA: 'permission_textarea_data'
+    },
+    UPLOADER: {
+      DATA: 'permission_uploader_data'
+    },
+    CONFIRM_MODAL: {
+      ACTIVE: 'permission_confirm_modal_active'
+    },
+    SUBMIT: 'permission_submit'
+  },
+  SWITCHER: {
+    ACTIVE: 'switcher_active'
+  }
+}
 
 
 export { 
   formType, 
   FormGroupPropType,
   InitialState,
-  ReducerPropType,
+  FormGroupReducerPropType,
   CostumComponentPropType,
-  HANDLE_CASE
+  FORM_GROUP_HANDLE_CASE
 };
 

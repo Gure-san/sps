@@ -4,7 +4,7 @@ import { useRef } from 'react';
 // Type
 import { 
   CostumComponentPropType,
-  HANDLE_CASE
+  FORM_GROUP_HANDLE_CASE
 } from '../../types/components/formGroupType';
 
 const defaultPlaceholder = 'Tidak ada file yang diupload!';
@@ -23,7 +23,7 @@ export function Uploader({formGroupData, dispatch}: CostumComponentPropType) {
       <input
         onChange={() => {
           dispatch({
-            type: HANDLE_CASE.FORM.PERMISSION.UPLOADER.DATA_UPLOADER_COMPONENT,
+            type: FORM_GROUP_HANDLE_CASE.PERMISSION.UPLOADER.DATA,
             payload: inputFileElement.current?.files
           }
         )}}

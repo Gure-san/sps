@@ -1,1 +1,2 @@
-export { Modal } from './Modal';
+export { ContactListModal } from './ContactListModal';
+export { ConfirmActionModal } from './ConfirmActionModal';

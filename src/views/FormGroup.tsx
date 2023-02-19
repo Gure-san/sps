@@ -11,8 +11,8 @@ import { Notification } from '../components/Notification';
 // Type
 import {
   InitialState,
-  ReducerPropType,
-  HANDLE_CASE,
+  FormGroupReducerPropType,
+  FORM_GROUP_HANDLE_CASE,
 } from '../types/components/formGroupType';
 import { textareaPlaceholder } from '../types/components/textareaType';
 import { selectStateValue } from '../types/components/selectType';
@@ -20,13 +20,13 @@ import { notificationType } from '../types/components/notificationType';
 
 // Asset
 import swapIcon from '../assets/swap.svg';
-import close from '../assets/close.svg';
 
 const initialState: InitialState = {
   attedance: {
     date: null,
     timestamp: null,
     user: null,
+    confirmAction: false
   },
   permission: {
     select: {
@@ -38,6 +38,7 @@ const initialState: InitialState = {
       fileInfo: null,
     },
     textarea: textareaPlaceholder,
+    confirmAction: false
   },
   switcher: {
     status: false,
@@ -46,10 +47,28 @@ const initialState: InitialState = {
 
 function reducer(
   state: InitialState,
-  { type, payload }: ReducerPropType
+  { type, payload }: FormGroupReducerPropType
 ): InitialState {
   switch (type) {
-    case HANDLE_CASE.FORM.PERMISSION.SELECT.ACTIVE_SELECT_COMPONENT:
+    case FORM_GROUP_HANDLE_CASE.ATTEDANCE.CONFIRM_MODAL.ACTIVE:
+      return {
+        ...state,
+        attedance: {
+          ...state.attedance,
+          confirmAction: !state.attedance.confirmAction
+        }
+      };
+
+    case FORM_GROUP_HANDLE_CASE.ATTEDANCE.SUBMIT:
+      return {
+        ...state,
+        attedance: {
+          ...state.attedance,
+          confirmAction: false
+        }
+      };
+
+    case FORM_GROUP_HANDLE_CASE.PERMISSION.SELECT.ACTIVE:
       return {
         ...state,
         permission: {
@@ -61,7 +80,7 @@ function reducer(
         },
       };
 
-    case HANDLE_CASE.FORM.PERMISSION.SELECT.DATA_SELECT_COMPONENT:
+    case FORM_GROUP_HANDLE_CASE.PERMISSION.SELECT.DATA:
       return {
         ...state,
         permission: {
@@ -73,7 +92,7 @@ function reducer(
         },
       };
 
-    case HANDLE_CASE.FORM.PERMISSION.UPLOADER.DATA_UPLOADER_COMPONENT:
+    case FORM_GROUP_HANDLE_CASE.PERMISSION.UPLOADER.DATA:
       const files: FileList = payload;
       return {
         ...state,
@@ -86,7 +105,7 @@ function reducer(
         },
       };
 
-    case HANDLE_CASE.FORM.PERMISSION.TEXTAREA.DATA_TEXTAREA_COMPONENT:
+    case FORM_GROUP_HANDLE_CASE.PERMISSION.TEXTAREA.DATA:
       return {
         ...state,
         permission: {
@@ -95,7 +114,25 @@ function reducer(
         },
       };
 
-    case HANDLE_CASE.SWITCH_FORM.ACTIVE_SWITCH:
+    case FORM_GROUP_HANDLE_CASE.PERMISSION.CONFIRM_MODAL.ACTIVE:
+      return {
+        ...state,
+        permission: {
+          ...state.permission,
+          confirmAction: !state.permission.confirmAction
+        }
+      };
+
+    case FORM_GROUP_HANDLE_CASE.PERMISSION.SUBMIT:
+      return {
+        ...state,
+        permission: {
+          ...state.permission,
+          confirmAction: false
+        }
+      };
+
+    case FORM_GROUP_HANDLE_CASE.SWITCHER.ACTIVE:
       return {
         ...state,
         switcher: {
@@ -121,7 +158,7 @@ export default function FormGroup() {
         <button
           onClick={() =>
             setFormGroupData({
-              type: HANDLE_CASE.SWITCH_FORM.ACTIVE_SWITCH,
+              type: FORM_GROUP_HANDLE_CASE.SWITCHER.ACTIVE,
             })
           }
           className="bg-black p-2 rounded-md h-max">
