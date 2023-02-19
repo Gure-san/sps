@@ -7,6 +7,9 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 // Components
 import { Timestamp } from '../components/Timestamp';
 
+// Type
+import { timestampType } from '../types/components/timpestampType';
+
 export default function HomeLayout() {
   const [switchForm, setSwitchForm] = useState(false);
   const { pathname } = useLocation();
@@ -21,8 +24,10 @@ export default function HomeLayout() {
           <div className='my-2'>
             <p>Jum'at, 13 Januari 2023</p>
             <p>
-              Dibuka pukul -{' '}
-              <Timestamp className="font-semibold" time="06.02" />
+              Dibuka pukul - <Timestamp
+              category={timestampType.OPEN}
+              className="font-semibold" 
+              time="06.02" />
             </p>
           </div>
         </div>
