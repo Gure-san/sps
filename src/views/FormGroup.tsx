@@ -1,6 +1,9 @@
 // React
 import React, { useEffect, useReducer, useState } from 'react';
 
+// React Router
+import { useOutletContext } from 'react-router';
+
 // Views
 import { AttendanceForm } from './AttendanceForm';
 import { PermissionForm } from './PermissionForm';
@@ -29,6 +32,7 @@ const initialState: InitialState = {
     date: null,
     timestamp: null,
     user: null,
+    hasAttended: false,
     confirmAction: false,
   },
   permission: {
@@ -67,10 +71,18 @@ function reducer(
       };
 
     case FORM_GROUP_HANDLE_CASE.ATTEDANCE.SUBMIT:
+      // Development only
+      useLocalStorage({
+        method: 'set',
+        key: 'sps.attedance',
+        value: true
+      })
+
       return {
         ...state,
         attedance: {
           ...state.attedance,
+          hasAttended: true,
           confirmAction: false,
         },
       };
@@ -173,7 +185,7 @@ function reducer(
         localStorage: {
           fetchInitialData: true
         }
-      }
+      };
 
     default:
       return state;
@@ -181,9 +193,14 @@ function reducer(
 }
 
 export default function FormGroup() {
+  const homeLayoutDispatch = useOutletContext <React.Dispatch<boolean>>();
   const [formGroupData, setFormGroupData] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    if (formGroupData.attedance.hasAttended) {
+      homeLayoutDispatch(formGroupData.attedance.hasAttended);
+    }
+
     const tooltipState = useLocalStorage({
       method: 'get',
       key: 'sps.tooltip'
@@ -195,9 +212,7 @@ export default function FormGroup() {
         payload: tooltipState
       })
     }
-  }, [formGroupData.switcher.tooltip]);
-
-  console.log(formGroupData.switcher.tooltip)
+  }, [formGroupData.switcher.tooltip, formGroupData.attedance.hasAttended]);
 
   return (
     <React.Fragment>

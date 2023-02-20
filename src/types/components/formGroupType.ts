@@ -11,6 +11,7 @@ interface InitialState {
     user: object | null, // user interface
     timestamp: string | null,
     date: object | null, // date interface
+    hasAttended: boolean,
     confirmAction: boolean
   };
   permission: {

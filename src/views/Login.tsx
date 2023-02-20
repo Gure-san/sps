@@ -50,7 +50,7 @@ function reducer(
         class: 'XII RPL A',
         phoneNumber: '081235918140',
         valid: true // Pass Validation 
-      }
+      };
 
     case LOGIN_HANDLE_CASE.MODAL:
       return {
